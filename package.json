@@ -4,6 +4,7 @@
     "description": "Project Assignment Backend for Football API",
     "main": "dist/index.js",
     "scripts": {
+        "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
         "build": "tsc",
         "prestart": "npm run build",
         "start": "node .",
@@ -20,6 +21,7 @@
     },
     "homepage": "https://github.com/irhspur/project-assignment-backend-roop#readme",
     "dependencies": {
+        "axios": "^0.20.0",
         "express": "^4.17.1"
     },
     "devDependencies": {
