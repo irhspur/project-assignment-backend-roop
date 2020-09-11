@@ -8,6 +8,7 @@
         "sourceMap": true,
         "outDir": "dist",
         "baseUrl": ".",
+        "removeComments": false,
         "paths": {
             "*": ["node_modules/*"]
         }
