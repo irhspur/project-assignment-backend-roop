@@ -1,6 +1,6 @@
 import express from 'express';
 import api from './services/api';
-import { getTeams } from './utils/dataUtils';
+import { getTeams, formatTeamwiseMatches } from './utils/dataUtils';
 const app = express();
 const port = 8080;
 
@@ -20,22 +20,22 @@ app.get('/match-details', async (req, res) => {
         const year = '2015-16'
         const response = await api.get(`/${year}/en.1.json`)
 
-        const teams = getTeams(response.data.rounds)
+        const teams = formatTeamwiseMatches(response.data.rounds)
         
-        return res.json(response.data);
+        return res.json(teams);
     }
     catch (err) {
         return res.json({})
     }
 });
 
-app.get('/teams', async (req, res) => {
+app.get('/full', async (req, res) => {
     try {
         const year = '2015-16'
         const response = await api.get(`/${year}/en.1.json`)
         console.log(response.data);
 
-        return res.json(getTeams(response.data.rounds));
+        return res.json(response.data.rounds);
     }
     catch (err) {
         return res.json({})

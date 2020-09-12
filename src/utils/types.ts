@@ -33,7 +33,14 @@ export type TTeamData = {
     loss?: number;
     draw?: number;
     goalsFor?: number;
-    goalsAgains?: number;
+    goalsAgainst?: number;
     goalsDifference?: number;
+    points?: number;
+}
+
+export type TStats = {
+    win?: number;
+    loss?: number;
+    draw?: number;
     points?: number;
 }
