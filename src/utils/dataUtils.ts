@@ -60,8 +60,8 @@ const combineTeamStat = (existingData: TTeamData, teamStats: TStats, teamName: s
     }
 
     if (existingData) {
-        return ({ ...existingData, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: calculateValue(key) }), {}), matchesPlayed: existingData.matchesPlayed + 1 })
+        return ({ name: teamName, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: calculateValue(key) }), {}), matchesPlayed: existingData.matchesPlayed + 1 })
     } else {
-        return ({ name: teamName, win: teamStats.win || 0, loss: teamStats.loss || 0, draw: teamStats.draw || 0, points: teamStats.points || 0, matchesPlayed: 1 })
+        return ({ name: teamName, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: teamStats[key] || 0 }), {}), matchesPlayed: 1 })
     }
 }
