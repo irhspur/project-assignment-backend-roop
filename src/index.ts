@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import api from './services/api';
-import { getTeams, formatTeamwiseMatches } from './utils/dataUtils';
+import { formatTeamwiseMatches } from './utils/dataUtils';
 const app = express();
 const port = 9000;
 
