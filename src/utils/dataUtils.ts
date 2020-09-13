@@ -1,4 +1,5 @@
 import { TRound, TTeamData, TStats, TLast5 } from "./types";
+import { teamImageMapping } from "./teamImageMapping";
 
 export const getTeams = (rounds: TRound[]) => {
     const teams = new Set<string>();
@@ -70,8 +71,8 @@ const combineTeamStat = (existingData: TTeamData, teamStats: TStats, teamName: s
     }
 
     if (existingData) {
-        return ({ name: teamName, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: calculateValue(key) }), {}), matchesPlayed: existingData.matchesPlayed + 1 })
+        return ({ ...existingData, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: calculateValue(key) }), {}), matchesPlayed: existingData.matchesPlayed + 1 })
     } else {
-        return ({ name: teamName, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: teamStats[key] || 0 }), {}), matchesPlayed: 1 })
+        return ({ name: teamName, ...statRows.reduce((acc, key: keyof TStats) => ({ ...acc, [key]: teamStats[key] || 0 }), {}), matchesPlayed: 1, clubLogo: teamImageMapping[teamName] || teamImageMapping.default })
     }
 }
