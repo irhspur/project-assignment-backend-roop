@@ -1,12 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import api from './services/api';
 import { getTeams, formatTeamwiseMatches } from './utils/dataUtils';
 const app = express();
-const port = 8080;
+const port = 9000;
 
-app.get('/clubs', async (req, res) => {
+app.use(cors())
+
+app.get('/clubs/:year', async (req, res) => {
     try {
-        const year = '2015-16'
+        const year = req.params.year || '2015-16'
         const response = await api.get(`/${year}/en.1.clubs.json`)
         return res.json(response.data);
     }
@@ -15,13 +18,13 @@ app.get('/clubs', async (req, res) => {
     }
 });
 
-app.get('/match-details', async (req, res) => {
+app.get('/match-details/:year', async (req, res) => {
     try {
-        const year = '2015-16'
+        const year = req.params.year || '2015-16';
         const response = await api.get(`/${year}/en.1.json`)
 
         const teams = formatTeamwiseMatches(response.data.rounds)
-        
+
         return res.json(teams);
     }
     catch (err) {
